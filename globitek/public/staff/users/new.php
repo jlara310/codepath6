@@ -12,7 +12,9 @@ $user = array(
   'email' => ''
 );
 
-if(is_post_request() && request_is_same_domain()) {
+//&& request_is_same_domain()
+
+if(is_post_request()) {
   ensure_csrf_token_valid();
 
   // Confirm that values are present before accessing them.
@@ -20,6 +22,8 @@ if(is_post_request() && request_is_same_domain()) {
   if(isset($_POST['last_name'])) { $user['last_name'] = $_POST['last_name']; }
   if(isset($_POST['username'])) { $user['username'] = $_POST['username']; }
   if(isset($_POST['email'])) { $user['email'] = $_POST['email']; }
+  if(isset($_POST['password'])) { $user['password'] = $_POST['password']; }
+  if(isset($_POST['confirm_password'])) { $user['confirm_password'] = $_POST['confirm_password']; }
 
   $result = insert_user($user);
   if($result === true) {
